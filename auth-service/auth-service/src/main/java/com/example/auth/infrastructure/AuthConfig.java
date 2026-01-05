@@ -1,0 +1,29 @@
+package com.example.auth.infrastructure;
+
+import com.example.auth.application.CreateCredentialApplicationService;
+import com.example.auth.application.LoginApplicationService;
+import com.example.auth.application.PasswordVerifier;
+import com.example.auth.domain.CredentialRepository;
+import com.example.auth.infrastructure.security.BCryptPasswordVerifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AuthConfig {
+
+    @Bean
+    LoginApplicationService loginApplicationService(
+            CredentialRepository repository,
+            PasswordVerifier passwordVerifier
+    ) {
+        return new LoginApplicationService(repository, passwordVerifier);
+    }
+
+    @Bean
+    CreateCredentialApplicationService createCredentialApplicationService(
+            CredentialRepository repository,
+            BCryptPasswordVerifier verifier
+    ) {
+        return new CreateCredentialApplicationService(repository, verifier);
+    }
+}

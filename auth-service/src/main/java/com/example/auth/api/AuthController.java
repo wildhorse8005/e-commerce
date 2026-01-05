@@ -5,6 +5,7 @@ import com.example.auth.api.dto.LoginRequest;
 import com.example.auth.api.dto.LoginResponse;
 import com.example.auth.application.CreateCredentialApplicationService;
 import com.example.auth.application.LoginApplicationService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,7 +25,7 @@ public class AuthController {
 
     // 🔹 DEV / DEMO: CREATE CREDENTIAL
     @PostMapping("/credentials")
-    public void createCredential(@RequestBody CreateCredentialRequest request) {
+    public void createCredential(@Valid @RequestBody CreateCredentialRequest request) {
         createCredentialService.create(
                 request.identityId(),
                 request.password()
@@ -33,7 +34,7 @@ public class AuthController {
 
     // 🔹 LOGIN
     @PostMapping("/login")
-    public LoginResponse login(@RequestBody LoginRequest request) {
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
         loginService.login(
                 request.identityId(),
                 request.password()

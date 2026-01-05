@@ -1,9 +1,12 @@
 package com.example.auth.api.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.UUID;
 
 public record CreateCredentialRequest(
-        UUID identityId,
-        String password
+        @NotNull UUID identityId,
+        @NotBlank String password
 ) {}
 

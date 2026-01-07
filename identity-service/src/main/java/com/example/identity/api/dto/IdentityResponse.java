@@ -21,8 +21,19 @@ public class IdentityResponse {
         return r;
     }
 
-    public UUID getId() { return id; }
-    public String getEmail() { return email; }
-    public String getStatus() { return status; }
-    public Instant getCreatedAt() { return createdAt; }
+    public UUID getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
 }

@@ -1,10 +1,7 @@
 package com.example.identity.api.dto;
 
-public class CreateIdentityRequest {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
-    private String email;
-
-    public String getEmail() {
-        return email;
-    }
+public record CreateIdentityRequest(@NotBlank @Email String email) {
 }

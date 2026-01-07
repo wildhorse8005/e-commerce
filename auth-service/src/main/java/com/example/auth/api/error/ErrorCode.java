@@ -2,19 +2,19 @@ package com.example.auth.api.error;
 
 public enum ErrorCode {
 
-    // AUTH
+    // ===== AUTH =====
     INVALID_CREDENTIAL,
     ACCOUNT_LOCKED,
-    IDENTITY_SUSPENDED,
 
-    // IDENTITY
+    // ===== IDENTITY (AUTH VIEW) =====
     IDENTITY_NOT_FOUND,
-    IDENTITY_ALREADY_EXISTS,
+    IDENTITY_NOT_ACTIVE,
+    IDENTITY_SERVICE_UNAVAILABLE,
 
-    // REQUEST
+    // ===== REQUEST =====
     INVALID_REQUEST,
     VALIDATION_ERROR,
 
-    // SYSTEM
+    // ===== SYSTEM =====
     INTERNAL_ERROR
 }

@@ -4,6 +4,7 @@ import com.example.auth.application.CreateCredentialApplicationService;
 import com.example.auth.application.LoginApplicationService;
 import com.example.auth.application.PasswordVerifier;
 import com.example.auth.domain.CredentialRepository;
+import com.example.auth.infrastructure.identity.IdentityClient;
 import com.example.auth.infrastructure.security.BCryptPasswordVerifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,10 +14,11 @@ public class AuthConfig {
 
     @Bean
     LoginApplicationService loginApplicationService(
+            IdentityClient identityClient,
             CredentialRepository repository,
             PasswordVerifier passwordVerifier
     ) {
-        return new LoginApplicationService(repository, passwordVerifier);
+        return new LoginApplicationService(identityClient, repository, passwordVerifier);
     }
 
     @Bean

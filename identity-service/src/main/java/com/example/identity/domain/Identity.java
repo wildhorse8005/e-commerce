@@ -55,7 +55,7 @@ public class Identity {
 
     public static Identity create(String email) {
         if (email == null || email.isBlank()) {
-            throw new IllegalArgumentException("email must not be empty");
+            throw new IllegalArgumentException("Email must not be empty");
         }
         return new Identity(UUID.randomUUID(), email);
     }

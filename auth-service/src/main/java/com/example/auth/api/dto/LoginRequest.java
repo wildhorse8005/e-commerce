@@ -5,7 +5,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record LoginRequest(
-        @NotNull UUID identityId,
-        @NotBlank String password
-) {}
+public record LoginRequest(@NotNull UUID identityId, @NotBlank String password) {
+}

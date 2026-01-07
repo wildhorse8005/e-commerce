@@ -10,12 +10,7 @@ public class ApiErrorResponse {
     private final String message;
     private final String path;
 
-    public ApiErrorResponse(
-            int status,
-            String error,
-            String message,
-            String path
-    ) {
+    public ApiErrorResponse(int status, String error, String message, String path) {
         this.timestamp = Instant.now();
         this.status = status;
         this.error = error;
@@ -23,9 +18,23 @@ public class ApiErrorResponse {
         this.path = path;
     }
 
-    public Instant getTimestamp() { return timestamp; }
-    public int getStatus() { return status; }
-    public String getError() { return error; }
-    public String getMessage() { return message; }
-    public String getPath() { return path; }
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getPath() {
+        return path;
+    }
 }

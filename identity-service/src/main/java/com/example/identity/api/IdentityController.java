@@ -38,9 +38,9 @@ public class IdentityController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<IdentityResponse> get(@PathVariable UUID id) {
-        Identity identity = service.getIdentity(id);
-
-        return ResponseEntity.ok(IdentityResponse.from(identity));
+        return ResponseEntity.ok(
+                IdentityResponse.from(service.getIdentity(id))
+        );
     }
 
     /**
@@ -49,9 +49,9 @@ public class IdentityController {
      */
     @PostMapping("/{id}/suspend")
     public ResponseEntity<IdentityResponse> suspend(@PathVariable UUID id) {
-        Identity identity = service.suspendIdentity(id);
-
-        return ResponseEntity.ok(IdentityResponse.from(identity));
+        return ResponseEntity.ok(
+                IdentityResponse.from(service.suspendIdentity(id))
+        );
     }
 
     /**
@@ -60,8 +60,8 @@ public class IdentityController {
      */
     @PostMapping("/{id}/activate")
     public ResponseEntity<IdentityResponse> activate(@PathVariable UUID id) {
-        Identity identity = service.activateIdentity(id);
-
-        return ResponseEntity.ok(IdentityResponse.from(identity));
+        return ResponseEntity.ok(
+                IdentityResponse.from(service.activateIdentity(id))
+        );
     }
 }

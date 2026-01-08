@@ -1,5 +1,6 @@
 package com.example.identity.api.error;
 
+import com.example.identity.api.dto.ApiErrorResponse;
 import com.example.identity.application.exception.IdentityAlreadyExistsException;
 import com.example.identity.application.exception.IdentityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;

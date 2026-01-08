@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Identity {
 
     // ========================
-    // FIELDS (PRIVATE – ALWAYS)
+    // FIELDS (PRIVATE)
     // ========================
 
     @Id
@@ -36,8 +36,7 @@ public class Identity {
     // ========================
 
     /**
-     * Required by JPA only.
-     * DO NOT use directly.
+     * Required by JPA.
      */
     protected Identity() {
     }
@@ -50,7 +49,7 @@ public class Identity {
     }
 
     // ========================
-    // FACTORY METHOD
+    // FACTORY
     // ========================
 
     public static Identity create(String email) {
@@ -61,23 +60,23 @@ public class Identity {
     }
 
     // ========================
-    // DOMAIN ACCESSORS
-    // (NOT JavaBean getters)
+    // JAVA BEAN GETTERS
+    // (REQUIRED for Jackson & Spring)
     // ========================
 
-    public UUID id() {
+    public UUID getId() {
         return id;
     }
 
-    public String email() {
+    public String getEmail() {
         return email;
     }
 
-    public IdentityStatus status() {
+    public IdentityStatus getStatus() {
         return status;
     }
 
-    public Instant createdAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 

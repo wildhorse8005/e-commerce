@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -47,8 +48,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IdentityServiceUnavailableException.class)
     public ResponseEntity<ApiError> identityServiceUnavailable(IdentityServiceUnavailableException ex, HttpServletRequest req) {
         logError(ErrorCode.IDENTITY_SERVICE_UNAVAILABLE, ex, req);
-        return response(ErrorCode.IDENTITY_SERVICE_UNAVAILABLE, HttpStatus.SERVICE_UNAVAILABLE
-        );
+        return response(ErrorCode.IDENTITY_SERVICE_UNAVAILABLE, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
     // ===================== REQUEST =====================
@@ -63,6 +63,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> validationError(MethodArgumentNotValidException ex, HttpServletRequest req) {
         logError(ErrorCode.VALIDATION_ERROR, ex, req);
         return response(ErrorCode.VALIDATION_ERROR, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiError> resourceNotFound(NoResourceFoundException ex, HttpServletRequest req) {
+        logError(ErrorCode.NOT_FOUND, ex, req);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiError(ErrorCode.INVALID_REQUEST));
     }
 
     // ===================== FALLBACK =====================
@@ -80,12 +86,6 @@ public class GlobalExceptionHandler {
     }
 
     private void logError(ErrorCode code, Exception ex, HttpServletRequest req) {
-        log.error(
-                "AUTH_ERROR code={} path={} exception={}",
-                code,
-                req.getRequestURI(),
-                ex.getClass().getSimpleName(),
-                ex
-        );
+        log.error("AUTH_ERROR code={} path={} exception={}", code, req.getRequestURI(), ex.getClass().getSimpleName(), ex);
     }
 }

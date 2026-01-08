@@ -16,5 +16,6 @@ public enum ErrorCode {
     VALIDATION_ERROR,
 
     // ===== SYSTEM =====
+    NOT_FOUND,
     INTERNAL_ERROR
 }

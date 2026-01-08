@@ -17,11 +17,7 @@ public class LoginApplicationService {
     private final CredentialRepository repository;
     private final PasswordVerifier passwordVerifier;
 
-    public LoginApplicationService(
-            IdentityClient identityClient,
-            CredentialRepository repository,
-            PasswordVerifier passwordVerifier
-    ) {
+    public LoginApplicationService(IdentityClient identityClient, CredentialRepository repository, PasswordVerifier passwordVerifier) {
         this.identityClient = identityClient;
         this.repository = repository;
         this.passwordVerifier = passwordVerifier;
@@ -30,8 +26,7 @@ public class LoginApplicationService {
     public void login(UUID identityId, String rawPassword) {
 
         // Check identity existence
-        IdentityResponse identity = identityClient.getIdentity(identityId)
-                .orElseThrow(IdentityNotFoundException::new);
+        IdentityResponse identity = identityClient.getIdentity(identityId).orElseThrow(IdentityNotFoundException::new);
 
         // Check identity status
         if (!identity.statusEnum().isActive()) {
@@ -39,8 +34,7 @@ public class LoginApplicationService {
         }
 
         // Check credential
-        Credential credential = repository.findByIdentityId(identityId)
-                .orElseThrow(InvalidCredentialException::new);
+        Credential credential = repository.findByIdentityId(identityId).orElseThrow(InvalidCredentialException::new);
 
         // Check account locked
         if (credential.isLocked()) {

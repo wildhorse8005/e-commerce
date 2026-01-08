@@ -23,7 +23,7 @@ public class AuthController {
         this.createCredentialService = createCredentialService;
     }
 
-    // 🔹 DEV / DEMO: CREATE CREDENTIAL
+    // DEV / DEMO: CREATE CREDENTIAL
     @PostMapping("/credentials")
     public void createCredential(@Valid @RequestBody CreateCredentialRequest request) {
         createCredentialService.create(
@@ -32,7 +32,7 @@ public class AuthController {
         );
     }
 
-    // 🔹 LOGIN
+    // LOGIN
     @PostMapping("/login")
     public LoginResponse login(@Valid @RequestBody LoginRequest request) {
         loginService.login(

@@ -48,7 +48,7 @@ public class LoginApplicationService {
             throw new InvalidCredentialException();
         }
 
-        // Reset failures on sucess
+        // Reset failures on success
         credential.resetFailures();
         repository.save(credential);
     }

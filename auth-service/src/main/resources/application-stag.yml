@@ -12,3 +12,15 @@ auth:
     issuer: auth-service
     secret: ${AUTH_JWT_SECRET}
     expiration-minutes: 15
+
+logging:
+  pattern:
+    console: >
+      %d{yyyy-MM-dd HH:mm:ss.SSS}
+      level=%-5level
+      service=%X{service}
+      traceId=%X{traceId}
+      path=%X{path}
+      durationMs=%X{durationMs}
+      logger=%logger
+      message="%msg"%n

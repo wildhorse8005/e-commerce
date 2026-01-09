@@ -1,15 +1,16 @@
 package com.example.auth.infrastructure.identity;
 
-import com.example.auth.application.exception.IdentityServiceUnavailableException;
 import com.example.auth.infrastructure.identity.dto.IdentityResponse;
-import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestClient;
-import org.springframework.web.client.RestClientResponseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.client.*;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public class IdentityRestClient implements IdentityClient {
+
+    private static final Logger log = LoggerFactory.getLogger(IdentityRestClient.class);
 
     private final RestClient restClient;
 
@@ -28,19 +29,35 @@ public class IdentityRestClient implements IdentityClient {
 
             return Optional.ofNullable(response);
 
-        } catch (RestClientResponseException ex) {
+        } catch (HttpClientErrorException.NotFound ex) {
+            // 404 → identity not found (business case)
+            return Optional.empty();
 
-            // 404 → Identity does not exist (BUSINESS CASE)
-            if (ex.getStatusCode().value() == 404) {
-                return Optional.empty();
-            }
+        } catch (HttpClientErrorException ex) {
+            // 4xx → client / contract issue
+            log.warn(
+                    "event=IDENTITY_CALL_FAILED status={} identityId={}",
+                    ex.getStatusCode().value(),
+                    identityId
+            );
+            throw ex;
 
-            // Other HTTP errors (5xx, 401, 403, etc.)
-            throw new IdentityServiceUnavailableException(ex);
+        } catch (HttpServerErrorException ex) {
+            // 5xx → identity-service error
+            log.error(
+                    "event=IDENTITY_SERVICE_ERROR status={} identityId={}",
+                    ex.getStatusCode().value(),
+                    identityId
+            );
+            throw ex;
 
         } catch (ResourceAccessException ex) {
-            // Connection refused / timeout / DNS error
-            throw new IdentityServiceUnavailableException(ex);
+            // timeout / connection refused
+            log.error(
+                    "event=IDENTITY_SERVICE_UNAVAILABLE identityId={}",
+                    identityId
+            );
+            throw ex;
         }
     }
 }

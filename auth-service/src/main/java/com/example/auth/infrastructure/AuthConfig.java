@@ -3,6 +3,7 @@ package com.example.auth.infrastructure;
 import com.example.auth.application.CreateCredentialApplicationService;
 import com.example.auth.application.LoginApplicationService;
 import com.example.auth.application.PasswordVerifier;
+import com.example.auth.application.token.TokenIssuer;
 import com.example.auth.domain.CredentialRepository;
 import com.example.auth.infrastructure.identity.IdentityClient;
 import com.example.auth.infrastructure.security.BCryptPasswordVerifier;
@@ -16,9 +17,10 @@ public class AuthConfig {
     LoginApplicationService loginApplicationService(
             IdentityClient identityClient,
             CredentialRepository repository,
-            PasswordVerifier passwordVerifier
+            PasswordVerifier passwordVerifier,
+            TokenIssuer tokenIssuer
     ) {
-        return new LoginApplicationService(identityClient, repository, passwordVerifier);
+        return new LoginApplicationService(identityClient, repository, passwordVerifier, tokenIssuer);
     }
 
     @Bean

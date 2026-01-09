@@ -5,6 +5,7 @@ import com.example.auth.api.dto.LoginRequest;
 import com.example.auth.api.dto.LoginResponse;
 import com.example.auth.application.CreateCredentialApplicationService;
 import com.example.auth.application.LoginApplicationService;
+import com.example.auth.application.LoginResult;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,10 +36,10 @@ public class AuthController {
     // LOGIN
     @PostMapping("/login")
     public LoginResponse login(@Valid @RequestBody LoginRequest request) {
-        loginService.login(
+        LoginResult result = loginService.login(
                 request.identityId(),
                 request.password()
         );
-        return new LoginResponse("LOGIN_SUCCESS");
+        return new LoginResponse(result.accessToken());
     }
 }

@@ -4,3 +4,11 @@ identity:
 
 server:
   port: 8081
+
+#Windows (PowerShell) - setx AUTH_JWT_SECRET "a-very-long-random-secret-at-least-32-characters"
+#macOS/Linux - setx AUTH_JWT_SECRET "a-very-long-random-secret-at-least-32-characters"
+auth:
+  jwt:
+    issuer: auth-service
+    secret: ${AUTH_JWT_SECRET}
+    expiration-minutes: 15

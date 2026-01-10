@@ -1,6 +1,6 @@
 package com.example.auth;
 
-import com.example.auth.application.PasswordVerifier;
+import com.example.auth.application.port.PasswordVerifier;
 import com.example.auth.domain.CredentialRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

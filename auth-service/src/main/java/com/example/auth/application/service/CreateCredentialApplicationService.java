@@ -1,27 +1,27 @@
-package com.example.auth.application;
+package com.example.auth.application.service;
 
+import com.example.auth.application.port.PasswordVerifier;
 import com.example.auth.domain.Credential;
 import com.example.auth.domain.CredentialRepository;
-import com.example.auth.infrastructure.security.BCryptPasswordVerifier;
 
 import java.util.UUID;
 
 public class CreateCredentialApplicationService {
 
     private final CredentialRepository repository;
-    private final BCryptPasswordVerifier passwordVerifier;
+    private final PasswordVerifier passwordVerifier;
 
     public CreateCredentialApplicationService(
             CredentialRepository repository,
-            BCryptPasswordVerifier passwordVerifier
+            PasswordVerifier passwordVerifier
     ) {
         this.repository = repository;
         this.passwordVerifier = passwordVerifier;
     }
 
     public void create(UUID identityId, String rawPassword) {
-        String hash = passwordVerifier.hash(rawPassword);
-        Credential credential = new Credential(identityId, hash);
+        String encoded = passwordVerifier.encode(rawPassword);
+        Credential credential = new Credential(identityId, encoded);
         repository.save(credential);
     }
 }

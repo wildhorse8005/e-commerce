@@ -76,6 +76,13 @@ public class GlobalExceptionHandler {
         return response(ErrorCode.INTERNAL_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(InternalAuthException.class)
+    public ResponseEntity<ApiError> internalAuthError(HttpServletRequest req) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ApiError(ErrorCode.INTERNAL_ERROR));
+    }
+
     // ===================== HELPERS =====================
 
     private ResponseEntity<ApiError> response(ErrorCode code, HttpStatus status) {

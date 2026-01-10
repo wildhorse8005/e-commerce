@@ -1,12 +1,12 @@
-package com.example.auth.application;
+package com.example.auth.application.service;
 
 import com.example.auth.api.error.ErrorCode;
-import com.example.auth.api.error.GlobalExceptionHandler;
+import com.example.auth.application.port.PasswordVerifier;
 import com.example.auth.application.exception.AccountLockedException;
 import com.example.auth.application.exception.IdentityNotActiveException;
 import com.example.auth.application.exception.IdentityNotFoundException;
 import com.example.auth.application.exception.InvalidCredentialException;
-import com.example.auth.application.token.TokenIssuer;
+import com.example.auth.application.port.TokenIssuer;
 import com.example.auth.domain.Credential;
 import com.example.auth.domain.CredentialRepository;
 import com.example.auth.infrastructure.identity.IdentityClient;

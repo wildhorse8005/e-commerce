@@ -1,6 +1,6 @@
 package com.example.auth.infrastructure.config;
 
-import com.example.auth.application.token.TokenIssuer;
+import com.example.auth.application.port.TokenIssuer;
 import com.example.auth.infrastructure.token.JwtTokenIssuer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

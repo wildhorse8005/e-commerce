@@ -1,11 +1,11 @@
-package com.example.auth.api;
+package com.example.auth.api.AuthController;
 
 import com.example.auth.api.dto.CreateCredentialRequest;
 import com.example.auth.api.dto.LoginRequest;
 import com.example.auth.api.dto.LoginResponse;
-import com.example.auth.application.CreateCredentialApplicationService;
-import com.example.auth.application.LoginApplicationService;
-import com.example.auth.application.LoginResult;
+import com.example.auth.application.service.CreateCredentialApplicationService;
+import com.example.auth.application.service.LoginApplicationService;
+import com.example.auth.application.service.LoginResult;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

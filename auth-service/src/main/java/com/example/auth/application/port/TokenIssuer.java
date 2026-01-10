@@ -1,4 +1,4 @@
-package com.example.auth.application.token;
+package com.example.auth.application.port;
 
 import java.util.UUID;
 
